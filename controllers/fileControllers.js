@@ -5,9 +5,6 @@ const prisma = new PrismaClient();
 
 const fileControllers = {
   upload: {
-    get: (req, res) => {
-      res.render("sda");
-    },
     post: (req, res, next) => {
       try {
         cloudinary.uploader.upload(req.file.path, (err, result) => {
@@ -108,6 +105,15 @@ const fileControllers = {
         res.redirect("/library");
       } catch (error) {
         console.log(error);
+        next(error);
+      }
+    },
+  },
+  folder: {
+    get: async (req, res, next) => {
+      try {
+        res.render("pages/folder", { user: req.user || null });
+      } catch (error) {
         next(error);
       }
     },

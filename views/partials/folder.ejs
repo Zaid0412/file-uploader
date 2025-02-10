@@ -1,24 +1,26 @@
-<% if(folders) { %> <% folders.map(folder => { %>
+<% if (folders) { %> <% folders.map(folder => { %>
 <tr class="table-row">
   <th>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="lucide lucide-folder-closed"
-    >
-      <path
-        d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
-      />
-      <path d="M2 10h20" />
-    </svg>
-    <%= folder.name || 'New Folder' %>
+    <a href="/folder/<%= folder.external_id %>">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-folder-closed"
+      >
+        <path
+          d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+        />
+        <path d="M2 10h20" />
+      </svg>
+      <%= folder.name || 'New Folder' %>
+    </a>
   </th>
   <th><%= folder.size || '2.64MB' %></th>
   <th>Nov 3, 2024</th>
@@ -46,7 +48,7 @@
         <li><a href="#">Option 1</a></li>
         <li><a href="#">Option 2</a></li>
         <li>
-          <a class="delete-btn" href="/folder/delete/<%= folder.external_id %>"
+          <a class="delete-btn" href="/folder/<%= folder.external_id %>/delete"
             >Delete</a
           >
         </li>

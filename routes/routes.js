@@ -23,6 +23,7 @@ router.get("/login", userControllers.login.get);
 router.get("/register", userControllers.register.get);
 router.get("/logout", userControllers.logout);
 router.get("/library", isAuth, indexControllers.library);
-router.get("/folder/delete/:id", isAuth, fileControllers.deleteFile.get);
+router.get("/folder/:id", isAuth, fileControllers.folder.get);
+router.get("/folder/:id/delete", isAuth, fileControllers.deleteFile.get);
 
 module.exports = router;

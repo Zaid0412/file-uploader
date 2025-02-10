@@ -435,7 +435,7 @@ body {
   text-align: center;
 }
 
-.folders-list .table-row th:nth-of-type(1) {
+.folders-list .table-row th:nth-of-type(1) a {
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -463,7 +463,7 @@ body {
   transform: scale(0.95);
 }
 
-.create-folder-modal {
+.create-folder {
   background-color: var(--gray2);
   box-shadow: 0 8px 24px 0 rgba(44, 38, 56, 0.5);
   border: none;
@@ -471,7 +471,7 @@ body {
   width: 20vw;
 }
 
-.create-folder-modal form {
+.create-folder form {
   padding: 2em;
   border-radius: 7px;
   /* box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
@@ -482,12 +482,12 @@ body {
   gap: 1em;
 }
 
-.create-folder-modal form .btns {
+.create-folder form .btns {
   display: flex;
   gap: 1em;
 }
 
-.create-folder-modal form input {
+.create-folder form input {
   background-color: var(--gray1);
   border: 1px solid var(--gray1);
   border-radius: 7px;
@@ -495,23 +495,23 @@ body {
   transition: all 0.15s ease-in;
 }
 
-.create-folder-modal form input:focus,
-.create-folder-modal form input:hover {
+.create-folder form input:focus,
+.create-folder form input:hover {
   border: 1px solid #5182ef;
   outline: none;
 }
 
-.create-folder-modal form input:focus {
+.create-folder form input:focus {
   box-shadow: 0 8px 24px 0 rgba(104, 98, 121, 0.2);
 }
 
-.create-folder-modal form input::placeholder {
+.create-folder form input::placeholder {
   color: var(--black);
   opacity: 0.6;
   font-weight: 200;
 }
 
-.create-folder-modal form button {
+.create-folder form button {
   background-color: var(--blue);
   color: var(--white);
   border: none;
@@ -525,7 +525,7 @@ body {
   flex-grow: 1;
 }
 
-.create-folder-modal form button:hover {
+.create-folder form button:hover {
   background-color: #3b73ed;
 }
 
