@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Library</title>
+  </head>
+  <body>
+    <%- include ('../partials/header') %>
+    <div class="library-header">
+      <h1>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="35"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-folder-open"
+        >
+          <path
+            d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"
+          /></svg
+        >My Library
+      </h1>
+      <a class="open-modal">
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-folder-plus"
+          >
+            <path d="M12 10v6" />
+            <path d="M9 13h6" />
+            <path
+              d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+            />
+          </svg>
+          Create Folder
+        </button>
+      </a>
+    </div>
+    <dialog class="create-folder-modal">
+      <form action="/newFolder" method="post">
+        <input
+          type="text"
+          name="folder"
+          id="folder"
+          value="New Folder"
+          required
+        />
+        <div class="btns">
+          <button type="submit">Create</button>
+          <button class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <table class="folders-list">
+      <tr class="headers">
+        <th>Name</th>
+        <th>Size</th>
+        <th>Date created</th>
+        <th></th>
+      </tr>
+      <!-- /// -->
+      <%- include ('../partials/folder') %>
+    </table>
+  </body>
+  <script>
+    document.querySelector(".open-modal").addEventListener("click", () => {
+      document.querySelector(".create-folder-modal").showModal();
+      console.log("aa");
+    });
+
+    document.querySelector(".cancel-btn").addEventListener("click", () => {
+      document.querySelector(".create-folder-modal").close();
+    });
+  </script>
+</html>

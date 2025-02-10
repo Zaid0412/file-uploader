@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Register!</title>
+  </head>
+  <body>
+    <%- include ('../partials/header') %>
+    <form action="/register" method="POST" class="register-form">
+      <div class="form-head">
+        <h1>Create an account</h1>
+        <p>Already have an account? <a href="/login">Log in</a></p>
+      </div>
+      <div class="inputs">
+        <input
+          type="text"
+          name="username"
+          class="username-input"
+          placeholder="Username"
+        />
+        <p class="err-msg"></p>
+        <input
+          type="password"
+          name="password"
+          class="password-input"
+          placeholder="Password"
+        />
+        <p class="err-msg"></p>
+        <input
+          type="password"
+          name="conf_password"
+          class="conf_password-input"
+          placeholder="Confirm Password"
+        />
+        <p class="err-msg"></p>
+        <div class="terms-and-conds-input">
+          <!-- From Uiverse.io by DaniloMGutavo -->
+          <label class="checkbox-container">
+            <input class="custom-checkbox" type="checkbox" name="terms" />
+            <span class="checkmark"></span>
+          </label>
+
+          <label for="terms"
+            >I agree to the <a href="#">Terms and Conditions</a></label
+          >
+        </div>
+      </div>
+      <button type="submit">Create account</button>
+    </form>
+  </body>
+</html>

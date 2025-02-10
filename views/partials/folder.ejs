@@ -1,0 +1,84 @@
+<% if(folders) { %> <% folders.map(folder => { %>
+<tr class="table-row">
+  <th>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-folder-closed"
+    >
+      <path
+        d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+      />
+      <path d="M2 10h20" />
+    </svg>
+    <%= folder.name || 'New Folder' %>
+  </th>
+  <th><%= folder.size || '2.64MB' %></th>
+  <th>Nov 3, 2024</th>
+  <th>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="options-btn"
+      onclick="toggleDropdown(event)"
+    >
+      <circle cx="12" cy="12" r="1" />
+      <circle cx="19" cy="12" r="1" />
+      <circle cx="5" cy="12" r="1" />
+    </svg>
+    <!-- Dropdown Menu -->
+    <div class="dropdown-menu">
+      <ul>
+        <li><a href="#">Option 1</a></li>
+        <li><a href="#">Option 2</a></li>
+        <li>
+          <a class="delete-btn" href="/folder/delete/<%= folder.path %>"
+            >Delete</a
+          >
+        </li>
+      </ul>
+    </div>
+  </th>
+</tr>
+<% }) %> <% } %>
+
+<script>
+  function toggleDropdown(event) {
+    const dropdown = event.target.closest("tr").querySelector(".dropdown-menu");
+    const allDropdowns = document.querySelectorAll(".dropdown-menu");
+
+    // Close all other dropdowns
+    allDropdowns.forEach((menu) => {
+      if (menu !== dropdown) {
+        menu.style.display = "none";
+      }
+    });
+
+    // Toggle the clicked dropdown
+    dropdown.style.display =
+      dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  // Close dropdowns if clicked outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".options-btn")) {
+      document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+        menu.style.display = "none";
+      });
+    }
+  });
+</script>
