@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const { PrismaClient } = require("@prisma/client");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
+const { error } = require("console");
 const prisma = new PrismaClient();
 
 const userControllers = {
@@ -16,16 +17,16 @@ const userControllers = {
   },
   register: {
     get: (req, res) => {
-      res.render("pages/register", { user: null });
+      res.render("pages/register", { user: null, errors: null });
     },
     post: async (req, res, next) => {
       try {
         const errors = validationResult(req);
         console.log(errors.array());
         if (!errors.isEmpty()) {
-          res.render("register", {
+          res.render("pages/register", {
             user: req.user || null,
-            errors: errors.array(),
+            errors: errors.array() || null,
           });
           console.log(errors);
         } else {

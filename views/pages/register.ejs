@@ -20,21 +20,36 @@
           class="username-input"
           placeholder="Username"
         />
+        <% if (errors) { %> <% errors.map(err => { %> <% if (err.path ==
+        'username'){ %>
+        <p class="err-msg"><%= err.msg %></p>
+        <% } %> <% }) %> <% }else { %>
         <p class="err-msg"></p>
+        <% } %>
         <input
           type="password"
           name="password"
           class="password-input"
           placeholder="Password"
         />
+        <% if (errors) { %> <% errors.map(err => { %> <% if (err.path ==
+        'password'){ %>
+        <p class="err-msg"><%= err.msg %></p>
+        <% } %> <% }) %> <% }else { %>
         <p class="err-msg"></p>
+        <% } %>
         <input
           type="password"
           name="conf_password"
           class="conf_password-input"
           placeholder="Confirm Password"
         />
+        <% if (errors) { %> <% errors.map(err => { %> <% if (err.path ==
+        'confirm_password'){ %>
+        <p class="err-msg"><%= err.msg %></p>
+        <% } %> <% }) %> <% }else { %>
         <p class="err-msg"></p>
+        <% } %>
         <div class="terms-and-conds-input">
           <!-- From Uiverse.io by DaniloMGutavo -->
           <label class="checkbox-container">
