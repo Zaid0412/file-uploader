@@ -564,7 +564,7 @@ body {
 }
 
 .dropdown-menu li a.delete-btn:hover {
-  background-color: rgba(242, 0, 60, 0.3);
+  background-color: rgba(242, 0, 60, 0.15);
 }
 
 /* Positioning the options button */
