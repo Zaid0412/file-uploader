@@ -5,29 +5,30 @@ const prisma = new PrismaClient();
 
 const fileControllers = {
   upload: {
-    post: (req, res, next) => {
+    post: async (req, res, next) => {
       try {
-        cloudinary.uploader.upload(req.file.path, (err, result) => {
-          if (err) {
-            console.log("Error" + err);
-            return res.status(500).json({
-              success: false,
-              message: "Error",
-            });
-          }
-
-          res.status(200).json({
-            success: true,
-            message: "Uploaded!",
-            data: result,
+        if (!req.file) {
+          return res.status(400).json({
+            success: false,
+            message: "No file uploaded.",
           });
+        }
+
+        const external_id = req.params.id;
+        const curFolder = await prisma.folder.findFirst({
+          where: { id: external_id },
         });
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: curFolder.name,
+        });
+        res.status(200).redirect(`/folder/${external_id}`);
       } catch (error) {
-        console.log("Error" + error);
+        console.log("Error: " + error);
         next(error);
       }
     },
   },
+
   deleteFile: {
     get: async (req, res, next) => {
       // try {
@@ -112,7 +113,11 @@ const fileControllers = {
   folder: {
     get: async (req, res, next) => {
       try {
-        res.render("pages/folder", { user: req.user || null });
+        const external_id = req.params.id;
+        const curFolder = await prisma.folder.findFirst({
+          where: { id: external_id },
+        });
+        res.render("pages/folder", { user: req.user || null, curFolder });
       } catch (error) {
         next(error);
       }

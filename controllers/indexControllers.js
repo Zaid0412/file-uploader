@@ -1,5 +1,7 @@
+const { PrismaClient } = require("@prisma/client");
 const cloudinary = require("../config/cloudinaryConfig");
 const moment = require("moment");
+const prisma = new PrismaClient();
 
 // Define the function to format bytes
 const formatBytes = (bytes) => {
@@ -24,12 +26,21 @@ const indexControllers = {
   library: async (req, res, next) => {
     try {
       const folderData = await cloudinary.api.root_folders();
+      const prismaFolderData = await prisma.folder.findMany();
 
       // Map each folder to a promise that fetches its size
       const updatedFolders = await Promise.all(
         folderData.folders.map(async (f) => {
           let totalSizeBytes = 0;
           let nextCursor = null;
+          let date;
+          prismaFolderData.map((pf) => {
+            if (pf.id == f.external_id) {
+              // Formatting Date
+              date = moment(pf.createAt).format("MMM D, YYYY");
+              console.log(date);
+            }
+          });
           do {
             // Fetch resources for the current folder
             const result = await cloudinary.api.resources({
@@ -52,12 +63,12 @@ const indexControllers = {
           return {
             ...f, // Keep all existing folder info
             size: formatBytes(totalSizeBytes), // Add computed size
+            createdAt: date,
           };
         }),
       );
 
       // Render the updated folder list with sizes
-      // console.log(updatedFolders);
       res.render("pages/library", {
         user: req.user || null,
         folders: updatedFolders,

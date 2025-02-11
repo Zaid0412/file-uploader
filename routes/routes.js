@@ -10,7 +10,7 @@ const router = require("express").Router();
 router.post("/login", userControllers.login.post);
 router.post("/register", registerValidation, userControllers.register.post);
 router.post(
-  "/upload",
+  "/:id/upload",
   isAuth,
   upload.single("image"),
   fileControllers.upload.post,
