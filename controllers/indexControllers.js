@@ -25,20 +25,42 @@ const indexControllers = {
 
   library: async (req, res, next) => {
     try {
-      const folderData = await cloudinary.api.root_folders();
-      const prismaFolderData = await prisma.folder.findMany();
+      // const cloudinaryFolders = await cloudinary.api.root_folders();
+      // const prismaFolderData = await prisma.folder.findMany({
+      //   where: { userId: req.user.id },
+      // });
+      // console.log(prismaFolderData);
+
+      // const prismaFolderIds = prismaFolderData.map((f) => f.external_id);
+
+      // const matchingCloudinaryFolders = cloudinaryFolders.folders.filter(
+      //   (folder) => prismaFolderIds.includes(folder.id),
+      // );
+      const cloudinaryFolders = await cloudinary.api.root_folders();
+
+      // Fetch folders from Prisma that belong to the current user
+      const prismaFolders = await prisma.folder.findMany({
+        where: { userId: req.user.id },
+      });
+
+      // Extract the external_id from Prisma folders
+      const prismaExternalIds = prismaFolders.map((f) => f.id); // 'id' is stored as external_id in Cloudinary
+
+      // Filter Cloudinary folders to match the Prisma external_ids
+      const userFolders = cloudinaryFolders.folders.filter((folder) =>
+        prismaExternalIds.includes(folder.external_id),
+      );
 
       // Map each folder to a promise that fetches its size
       const updatedFolders = await Promise.all(
-        folderData.folders.map(async (f) => {
+        userFolders.map(async (f) => {
           let totalSizeBytes = 0;
           let nextCursor = null;
           let date;
-          prismaFolderData.map((pf) => {
+          prismaFolders.map((pf) => {
             if (pf.id == f.external_id) {
               // Formatting Date
               date = moment(pf.createAt).format("MMM D, YYYY");
-              console.log(date);
             }
           });
           do {

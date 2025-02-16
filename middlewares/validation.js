@@ -16,22 +16,14 @@ module.exports.registerValidation = [
     .withMessage(`Password ${lengthMsg}`),
   check("confirm_password")
     .custom((value, { req }) => {
-      if (value !== req.body.password)
+      if (req.body.conf_password !== req.body.password) {
+        console.log(req.body.conf_password);
+        console.log(req.body.password);
         throw new Error("Password did not match");
+      }
       return true;
     })
     .withMessage("Passwords did not match."),
 ];
 
-module.exports.postValidation = [
-  check("title")
-    .exists()
-    .withMessage(`Title ${isReqMsg}`)
-    .isLength({ min: 5, max: 45 })
-    .withMessage(`Title ${lengthMsg}`),
-  check("content")
-    .exists()
-    .withMessage(`Content ${isReqMsg}`)
-    .isLength({ min: 8, max: 60 })
-    .withMessage(`Content should be between 8 and 60 characters`),
-];
+module.exports.uploadValidation = [check("image").exists()];

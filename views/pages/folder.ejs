@@ -54,26 +54,39 @@
             </button>
         </a>
         </div>
+        <table class="folders-list">
+          <tr class="headers">
+            <th>Name</th>
+            <th>Size</th>
+            <th>Date created</th>
+            <th></th>
+          </tr>
+          <!-- /// -->
+      <%- include ('../partials/file') %>
+        </table>
         <dialog class="upload-file-modal">
-                <form class="file-upload-form" action="/<%= curFolder.id %>/upload" method="post"  enctype="multipart/form-data">
-                    <label for="file" class="file-upload-label">
-                    <div class="file-upload-design">
-                        <svg viewBox="0 0 640 512" height="1em">
-                        <path
-                            d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
-                        ></path>
-                        </svg>
-                        <p>Drag and Drop</p>
-                        <p>or</p>
-                        <span class="browse-button">Browse file</span>
-                    </div>
-                    <input id="file" type="file" name="image"/>
-                    </label>
-                </form>  
+            <form class="file-upload-form" action="/<%= curFolder.id %>/upload" method="post" enctype="multipart/form-data">
+                <label for="file" class="file-upload-label">
+                  <div class="file-upload-design">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="17 8 12 3 7 8" />
+                      <line x1="12" x2="12" y1="3" y2="15" />
+                    </svg>
+                    <p id="file-name"><em>Max File Size: 5MB</em></p>
+                  </div>
+                  <input id="file" type="file" name="image"/>
+                </label>
+                <p id="file-error"></p>
+                <button class="submit-file" >Upload File</button>
+              </form>
             </div>
         </dialog>
+        <div class="files">
+    </div>
     </body>
     <script>
+        <!-- JS to open and close Modal  -->
         document.querySelector(".open-modal").addEventListener("click", () => {
         document.querySelector(".upload-file-modal").showModal();
         console.log("aa");
@@ -85,9 +98,49 @@
             }
         });
 
-        document.querySelector('#file').addEventListener('change', () => {
-            document.querySelector('.file-upload-form').submit()
-            console.log('Submit!')
-        })
+        document.getElementById("file").addEventListener("change", function(event) {
+            const fileName = event.target.files[0]?.name || "No file chosen";
+            document.getElementById("file-name").textContent = fileName;
+            console.log(event.target)
+
+
+        
+
+          });
+
+          document.getElementById("file").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            const fileNameElement = document.getElementById("file-name");
+            const fileErrorElement = document.getElementById("file-error");
+            const submitButton = document.querySelector(".submit-file");
+
+            const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
+      
+            const curFile = event.target.files[0];
+        
+            if (!allowedTypes.includes(curFile.type)) {
+                fileErrorElement.textContent = "Invalid file type! Please upload a JPG, PNG, or PDF."
+                fileErrorElement.style.display = "block";
+                submitButton.disabled = true;
+                return;
+            }
+        
+            if (file) {
+              const fileSizeMB = file.size / (1024 * 1024); // Convert bytes to MB
+              if (fileSizeMB > 5) {
+                fileErrorElement.textContent = "File is too large! Max size is 5MB.";
+                fileErrorElement.style.display = "block";
+                submitButton.disabled = true;
+              } else {
+                fileNameElement.textContent = file.name;
+                fileErrorElement.style.display = "none";
+                submitButton.disabled = false;
+              }
+            } else {
+              fileNameElement.textContent = "No file chosen";
+              fileErrorElement.style.display = "none";
+              submitButton.disabled = true;
+            }
+          });
     </script>
     </html>

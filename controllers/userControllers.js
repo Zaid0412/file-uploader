@@ -27,7 +27,6 @@ const userControllers = {
           res.render("pages/register", {
             user: req.user || null,
             errors: errors.array() || null,
-            r,
           });
           console.log(errors);
         } else {
