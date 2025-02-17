@@ -38,4 +38,13 @@ app.set("view engine", "ejs");
 
 app.use(router);
 
+app.use((err, req, res, next) => {
+  // next(createError(404));
+  res.render("pages/error", {
+    message: err.message || null,
+    user: req.user || null,
+  });
+  console.log(err.message);
+});
+
 app.listen(PORT, () => console.log(`App listening on Post: ${PORT}`));
