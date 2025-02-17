@@ -225,7 +225,8 @@ body {
   background-color: #eee;
   border-radius: 4px;
   transition: background-color 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .checkmark:after {
@@ -243,7 +244,8 @@ body {
 
 .custom-checkbox:checked ~ .checkmark {
   background-color: var(--blue);
-  box-shadow: 0 3px 7px rgba(44, 38, 56, 0.3);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .custom-checkbox:checked ~ .checkmark:after {
