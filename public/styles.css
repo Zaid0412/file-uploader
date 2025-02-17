@@ -9,6 +9,11 @@
   --gray2: #f3f4f6;
 }
 
+html {
+  width: 100vw;
+  height: 100vh;
+}
+
 * {
   font-family: "Poppins", serif;
   color: var(--black);
@@ -19,6 +24,8 @@ body {
   margin: 0;
   background-color: var(--white);
   display: grid;
+  width: 100vw;
+  height: 100vh;
 }
 
 /* Header */
@@ -26,7 +33,7 @@ body {
   display: flex;
   background-color: var(--gray2);
   align-items: center;
-  padding: 0.25em;
+  /* padding: 0.25em; */
   padding-left: 0.9em;
   padding-right: 0.9em;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
@@ -109,6 +116,34 @@ body {
   color: var(--red);
   font-size: 0.85em;
   margin-top: -0.7em;
+}
+
+/* Foooter */
+footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--gray2);
+  align-items: center;
+  padding: 0.25em;
+  padding-left: 0.9em;
+  padding-right: 0.9em;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin-top: auto;
+}
+
+footer p span {
+  font-weight: 600;
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: 400;
+  color: var(--blue);
+}
+
+footer a:hover {
+  filter: grayscale(50%);
 }
 
 /* Home Page  */
@@ -850,4 +885,26 @@ body {
   color: var(--red);
   margin: 0;
   margin-bottom: 10px;
+}
+
+/* Error Page */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.error-page h1 em {
+  color: var(--red);
+  opacity: 0.8;
+}
+
+.error-page a {
+  color: var(--blue);
+}
+
+.error-page a:hover {
+  text-decoration: none;
 }

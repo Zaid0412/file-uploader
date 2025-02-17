@@ -7,12 +7,13 @@
     <title>Error!</title>
   </head>
   <body>
-    <%- include ('partials/header') %>
+    <%- include ('../partials/header') %>
     <div class="error-page">
       <h1>
         <em> <%= message && message %> </em>
       </h1>
-      <a href="/library"> Back To Library </a>
+      <a href="/"> Back To Home Page </a>
     </div>
+    <%- include ('../partials/footer') %>
   </body>
 </html>
