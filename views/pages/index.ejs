@@ -7,9 +7,39 @@
     <title>Home Page!</title>
   </head>
   <body>
-    <%- include ('../partials/header') %> <% if (user) {%>
-    <h1><%= user.username %></h1>
-
-    <% } %>
+    <%- include ('../partials/header') %>
+    <div class="home-head">
+      <h1>Welcome to CloudDrop</h1>
+      <pre>
+        Your secure, reliable, and easy-to-use online file storage solution.
+        Start organizing and accessing your files from anywhere in the world.
+      </pre>
+      <a href="/login">
+        <button>Get Started</button>
+      </a>
+    </div>
+    <div class="head-cards">
+      <div>
+        <h1>Secure</h1>
+        <p>
+          Robust encryption to keep your files safe and secure from unauthorized
+          access.
+        </p>
+      </div>
+      <div>
+        <h1>Ready Access</h1>
+        <p>
+          Sync your files in the cloud, ensuring access to your latest version
+          across any device.
+        </p>
+      </div>
+      <div>
+        <h1>Easy-to-Use</h1>
+        <p>
+          User-friendly interface that makes organizing and accessing your files
+          a breeze.
+        </p>
+      </div>
+    </div>
   </body>
 </html>

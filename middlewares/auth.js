@@ -9,6 +9,7 @@ module.exports.isAuth = (req, res, next) => {
 module.exports.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     res.redirect("/library");
+    next();
   } else {
     next();
   }

@@ -21,9 +21,9 @@ router.post(
 router.post("/newFolder", isAuth, folderControllers.createFolder.post);
 
 // GET ROUTES
-router.get("/", isLoggedIn, indexControllers.home);
-router.get("/login", userControllers.login.get);
-router.get("/register", userControllers.register.get);
+router.get("/", indexControllers.home);
+router.get("/login", isLoggedIn, userControllers.login.get);
+router.get("/register", isLoggedIn, userControllers.register.get);
 router.get("/logout", userControllers.logout);
 router.get("/library", isAuth, indexControllers.library);
 router.get("/folder/:id", isAuth, folderControllers.folder.get);

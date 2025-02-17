@@ -11,7 +11,7 @@ const userControllers = {
       res.render("pages/login", { user: req.user || null });
     },
     post: passport.authenticate("local", {
-      successRedirect: "/",
+      successRedirect: "/library",
       failureRedirect: "/login",
     }),
   },
