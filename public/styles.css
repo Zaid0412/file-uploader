@@ -24,13 +24,14 @@ body {
   margin: 0;
   background-color: var(--white);
   display: grid;
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
 }
 
 /* Header */
 .header {
   display: flex;
+  height: 15vh;
   background-color: var(--gray2);
   align-items: center;
   /* padding: 0.25em; */
@@ -120,6 +121,7 @@ body {
 
 /* Foooter */
 footer {
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   background-color: var(--gray2);
@@ -130,6 +132,9 @@ footer {
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   margin-top: auto;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 footer p span {
@@ -433,6 +438,7 @@ footer a:hover {
 /* My Library Page  */
 .library-header {
   display: flex;
+  height: 10vh;
   justify-content: space-between;
   align-items: center;
   padding: 0 1.5em;
